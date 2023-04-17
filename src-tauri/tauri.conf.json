@@ -1,0 +1,61 @@
+{
+  "build": {
+    "beforeDevCommand": "",
+    "beforeBuildCommand": "",
+    "devPath": "../src",
+    "distDir": "../src",
+    "withGlobalTauri": true
+  },
+  "package": {
+    "productName": "ns_sse_aio",
+    "version": "0.1.0"
+  },
+  "tauri": {
+    "allowlist": {
+      "app": {
+        "all": false,
+        "hide": false,
+        "show": false
+      },
+      "process": {
+        "all": false,
+        "exit": true,
+        "relaunch": false,
+        "relaunchDangerousAllowSymlinkMacos": false
+      },
+      "all": false,
+      "shell": {
+        "all": false,
+        "open": true
+      },
+      "window": { 
+        "all": false, 
+        "setAlwaysOnTop": true,
+        "startDragging": true
+      }
+    },
+    "bundle": {
+      "active": false,
+      "icon": [],
+      "identifier": "app.visnk.netspeed",
+      "targets": "all"
+    },
+    "security": {
+      "csp": null
+    },
+    "updater": {
+      "active": false
+    },
+    "windows": [
+      {
+        "fullscreen": false,
+        "resizable": true,
+        "width":425,
+        "height": 70,
+        "title": "Netspeed",
+        "decorations":false,
+        "alwaysOnTop": true
+      }
+    ]
+  }
+}

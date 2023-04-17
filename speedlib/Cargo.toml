@@ -1,0 +1,35 @@
+# cargo-features = ["strip"]
+
+[profile.release]
+strip = true  # Automatically strip symbols from the binary.
+opt-level = "z"
+lto = true
+panic = "abort"
+
+[package]
+name = "ns_sse"
+version = "0.3.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+prefstore = "0.2.0"
+serde_json="1.0"
+# abserde = {version="0.3.3", features= ["json"], default-features = false }
+# serde = {version = "1.0.140", default-features = false }
+# fltk = "^1.3"
+chrono = "0.4.23"
+# fltk-anchor = "0.1"
+# network-interface = "0.1.5"
+sysinfo = { version="0.28.2", default-features = false }
+byte-unit = { features = ["u128"], default-features = false, version = "4.0.17" }
+# tokio = { version = "1.22.0", features = [ "full"]  }
+
+# [target.'cfg(target_os = "linux")'.dependencies]
+# heim = { version = "0.1.0-rc.1", features = [ "net"] }
+
+
+# [target.'cfg(target_os = "macos")'.dependencies]
+# heim = { version = "0.1.0-rc.1", features = ["net"] }
+
