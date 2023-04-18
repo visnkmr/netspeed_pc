@@ -20,6 +20,10 @@ async function exit() {
   // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
   await invoke("exit");
 }
+async function minimise() {
+  // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
+  await invoke("mini");
+}
 async function movewindow() {
   // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
   await invoke("startmove");
@@ -66,6 +70,12 @@ window.addEventListener("DOMContentLoaded", () => {
     // .addEventListener("click", () => button2_clicked());
     // .addEventListener("mousedown", () => appWindow.startDragging());
     ?.addEventListener("click", () => exit());
+    document
+    .querySelector("#mini")
+    // .addEventListener("click", () => greet("stop"));
+    // .addEventListener("click", () => button2_clicked());
+    // .addEventListener("mousedown", () => appWindow.startDragging());
+    ?.addEventListener("click", () => minimise());
 });
 let last_upload: number=0, last_download:number=0, upload_speed:number, down_speed:number
 

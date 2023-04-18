@@ -3,6 +3,9 @@ const { invoke } = window.__TAURI__.tauri;
 async function exit() {
     await invoke("exit");
 }
+async function minimise() {
+    await invoke("mini");
+}
 async function movewindow() {
     await invoke("startmove");
 }
@@ -17,6 +20,9 @@ window.addEventListener("DOMContentLoaded", () => {
     document
         .querySelector("#stop")
         ?.addEventListener("click", () => exit());
+    document
+        .querySelector("#mini")
+        ?.addEventListener("click", () => minimise());
 });
 let last_upload = 0, last_download = 0, upload_speed, down_speed;
 ssestart();

@@ -16,8 +16,15 @@ fn button1_clicked() -> String {
 }
 #[tauri::command]
 fn exit(app: AppHandle) {
-    print!("exit callled");
+    println!("exit callled");
   app.exit(0);
+}
+#[tauri::command]
+fn mini(app: AppHandle) ->Result<(),()>{
+  let k= app.get_window("main").unwrap();
+    println!("minimise callled");
+  k.minimize().unwrap();
+  Ok(())
 }
 #[tauri::command]
 fn startmove(window: Window){
@@ -78,11 +85,12 @@ let mut iname=String::new();
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler!
             [
-            greet,
-            button1_clicked,
-            button2_clicked,
+            // greet,
+            // button1_clicked,
+            // button2_clicked,
             startmove,
-            exit
+            exit,
+            mini
             ]
         )
         .run(tauri::generate_context!())
