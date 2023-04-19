@@ -32,17 +32,33 @@ async function movewindow() {
 //   // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 //   await invoke("startmove");
 // }
-function startstopmovewindow(e: MouseEvent){
-  // {
-    // tauri.invoke('drag_window');
-    if (e.buttons === 1 && e.target?.tagName !== 'BUTTON') 
-    {
-      // tauri.invoke('drag_window');
-      // if (e.target.hasAttribute('data-tauri-drag-region') && e.buttons === 1) 
-      movewindow()
-    }
-  // }
+// hidescrollbaredge()
+function hidescrollbaredge(){
+  document.querySelector('body').style.overflow='scroll';
+  var style=document.createElement('style');
+  style.type='text/css';
+  style.innerHTML='::-webkit-scrollbar{display:none}';
+  document.getElementsByTagName('body')[0].appendChild(style);
 }
+
+function startstopmovewindow(e: MouseEvent) {
+    // get the window element
+    let window = document.getElementById("window");
+    // get the event coordinates
+    let x = e.clientX;
+    let y = e.clientY;
+    // get the window dimensions
+    let w = window.offsetWidth;
+    let h = window.offsetHeight;
+    // define a threshold for resizing
+    let t = 1;
+    // check if the event is within the threshold of the window edges
+    let resize = (x < t || x > w - t || y < t || y > h - t);
+    // if not resizing and not clicking a button, then move the window
+    if (e.buttons === 1 && e.target?.tagName !== 'BUTTON' && !resize) {
+      movewindow();
+    }
+  }
 window.addEventListener('mousedown', (e) => startstopmovewindow(e));
 window.addEventListener('mouseup', (e) => startstopmovewindow(e));
 
