@@ -43,3 +43,5 @@ working.7z
 src/assets/javascript.svg
 src/assets/tauri.svg
 src-tauri/app-icon.png
+target/
+*.lock

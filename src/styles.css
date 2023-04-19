@@ -1,6 +1,6 @@
 :root {
-  /* font-family: Inter, Avenir, Helvetica, Arial, sans-serif; */
-  font-size: 12px;
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 15px;
   /* line-height: 24px; */
   /* font-weight: 400; */
 
@@ -12,6 +12,13 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+  overflow:hidden;
+  text-overflow:clip;
+  white-space: nowrap;
+}
+* {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 /* Hide scrollbar for Chrome, Safari and Opera */
 .overflow-auto::-webkit-scrollbar {

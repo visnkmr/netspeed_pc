@@ -9,11 +9,33 @@ async function minimise() {
 async function movewindow() {
     await invoke("startmove");
 }
-function startstopmovewindow(e) {
-    if (e.buttons === 1 && e.target?.tagName !== 'BUTTON') {
-        movewindow();
-    }
+// hidescrollbaredge()
+function hidescrollbaredge(){
+    document.querySelector('body').style.overflow='scroll';
+var style=document.createElement('style');
+style.type='text/css';
+style.innerHTML='::-webkit-scrollbar{display:none}';
+document.getElementsByTagName('body')[0].appendChild(style);
 }
+
+function startstopmovewindow(e) {
+    // get the window element
+    let window = document.getElementById("window");
+    // get the event coordinates
+    let x = e.clientX;
+    let y = e.clientY;
+    // get the window dimensions
+    let w = window.offsetWidth;
+    let h = window.offsetHeight;
+    // define a threshold for resizing
+    let t = 1;
+    // check if the event is within the threshold of the window edges
+    let resize = (x < t || x > w - t || y < t || y > h - t);
+    // if not resizing and not clicking a button, then move the window
+    if (e.buttons === 1 && e.target?.tagName !== 'BUTTON' && !resize) {
+      movewindow();
+    }
+  }
 window.addEventListener('mousedown', (e) => startstopmovewindow(e));
 window.addEventListener('mouseup', (e) => startstopmovewindow(e));
 window.addEventListener("DOMContentLoaded", () => {
