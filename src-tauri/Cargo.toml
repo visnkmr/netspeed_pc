@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "A Tauri based JS,Rust based GUI for netspeed_server_sse "
 authors = ["visnk"]
 license = "MIT"
-repository = "https://github.com/visnkmr/netspeed_gui"
+repository = "https://github.com/visnkmr/netspeed_pc"
 edition = "2021"
 
 [profile.release]
@@ -24,7 +24,8 @@ tauri = { version = "1.2", features = ["process-exit", "shell-open", "window-set
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 chrono = "0.4.23"
-prefstore= {git="https://github.com/visnkmr/prefstore.git"}
+# prefstore= {git="https://github.com/visnkmr/prefstore.git"}
+prefstore= "0.5.0"
 human-panic= {git="https://github.com/visnkmr/save-crash-logs-rs.git"}
 
 [features]

@@ -14,7 +14,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-prefstore = "0.2.0"
+prefstore = "0.5.0"
 serde_json="1.0"
 # abserde = {version="0.3.3", features= ["json"], default-features = false }
 # serde = {version = "1.0.140", default-features = false }

@@ -1,4 +1,16 @@
-const { invoke } = window.__TAURI__.tauri;
+type TauriEvent<T> = {
+  event: string // the event name
+  payload: Array<number> // the payload object
+}
+// create an interface for a JSON object value
+// interface JSONObject {
+//   [key: string]: number
+// }
+
+// create an interface for a JSON array value
+// interface JSONArray extends Array<JSONObject> {}
+
+const { invoke } = (window as any).__TAURI__.tauri;
 // import { appWindow } from '@tauri-apps/api/tauri'
 
 // let greetInputEl;
@@ -34,7 +46,7 @@ async function movewindow() {
 // }
 // hidescrollbaredge()
 function hidescrollbaredge(){
-  document.querySelector('body').style.overflow='scroll';
+  document.querySelector('body')!.style.overflow='scroll';
   var style=document.createElement('style');
   style.type='text/css';
   style.innerHTML='::-webkit-scrollbar{display:none}';
@@ -43,7 +55,7 @@ function hidescrollbaredge(){
 
 function startstopmovewindow(e: MouseEvent) {
     // get the window element
-    let window = document.getElementById("window");
+    let window = document.getElementById("window")!;
     // get the event coordinates
     let x = e.clientX;
     let y = e.clientY;
@@ -55,7 +67,7 @@ function startstopmovewindow(e: MouseEvent) {
     // check if the event is within the threshold of the window edges
     let resize = (x < t || x > w - t || y < t || y > h - t);
     // if not resizing and not clicking a button, then move the window
-    if (e.buttons === 1 && e.target?.tagName !== 'BUTTON' && !resize) {
+    if (e.buttons === 1 && (e.target as HTMLElement)?.tagName !== 'BUTTON' && !resize) {
       movewindow();
     }
   }

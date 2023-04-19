@@ -2,18 +2,18 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 use std::{thread, env, process};
-use ns_sse::*;
-use tauri::{Manager, AppHandle, Window};
+// use ns_sse::*;
+use tauri::{Manager, AppHandle, Window, Size, LogicalSize};
 
-// Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
-#[tauri::command]
-fn greet(name: &str) -> String {
-    format!("{}", name)
-}
-#[tauri::command]
-fn button1_clicked() -> String {
-    format!("start")
-}
+// // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
+// #[tauri::command]
+// fn greet(name: &str) -> String {
+//     format!("{}", name)
+// }
+// #[tauri::command]
+// fn button1_clicked() -> String {
+//     format!("start")
+// }
 #[tauri::command]
 fn exit(app: AppHandle) {
     println!("exit callled");
@@ -30,6 +30,7 @@ fn mini(app: AppHandle) ->Result<(),()>{
 fn startmove(window: Window){
     // start dragging the window when the button is clicked
     window.start_dragging().unwrap();
+    // window.set_size(Size::Logical(LogicalSize { width: 100.0, height: 100.0 })).unwrap();
     // get a handle to the current window
 // let window = Window::current();
 
@@ -104,7 +105,7 @@ let mut iname=String::new();
 //   eprintln!("Button 1 clicked!");
 // }
 
-#[tauri::command]
-fn button2_clicked() {
-  eprintln!("Button 2 clicked!");
-}
+// #[tauri::command]
+// fn button2_clicked() {
+//   eprintln!("Button 2 clicked!");
+// }

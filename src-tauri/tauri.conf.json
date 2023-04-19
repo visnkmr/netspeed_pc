@@ -50,11 +50,12 @@
       {
         "fullscreen": false,
         "resizable": true,
-        "width":300,
+        "width":350,
         "height": 40,
         "title": "Netspeed",
         "decorations":false,
         "alwaysOnTop": true
+      
       }
     ]
   }
