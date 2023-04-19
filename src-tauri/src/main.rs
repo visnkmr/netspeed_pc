@@ -52,7 +52,7 @@ fn startmove(window: Window){
 const appname: &str = "ns_gui_sse";
 
 fn main() {
-
+  std::env::set_var("GTK_OVERLAY_SCROLLING", "0");
   human_panic::setup_panic!(human_panic::Metadata {
     version: env!("CARGO_PKG_VERSION").into(),
     name: env!("CARGO_PKG_NAME").into(),
