@@ -1,13 +1,19 @@
 {
   "build": {
-    "beforeDevCommand": "",
-    "beforeBuildCommand": "",
+    "beforeDevCommand": {
+      "script": "npm run build:ts",
+      "wait": false
+    },
+    "beforeBuildCommand": {
+      "script": "npm run build:ts",
+      "wait": false
+    },
     "devPath": "../src",
     "distDir": "../src",
     "withGlobalTauri": true
   },
   "package": {
-    "productName": "ns_sse_aio",
+    "productName": "Netspeed",
     "version": "0.1.0"
   },
   "tauri": {

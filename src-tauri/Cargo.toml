@@ -1,5 +1,5 @@
 [package]
-name = "ns_sse_aio"
+name = "Netspeed"
 version = "0.1.0"
 description = "A Tauri based JS,Rust based GUI for netspeed_server_sse "
 authors = ["visnk"]
