@@ -1,25 +1,40 @@
-<!-- ### Displays Live NetSpeed &amp; Time always on your Android TV/ Fire TV screen. Also monitor Free Memory, Uptime and Session Data Usage in Useful Information Screen. -->
-<!-- Available for Download @ -->
-Report Issues, Bugs, Feature Suggestion in github issues section [here](https://github.com/visnkmr/timenetspeed/issues) 
-  
-**Monitor live bandwidth usage/ network speed on any device running on any OS except iOS.**  
-  
-✓ **Tested on:** Linux, Windows, MacOS, Windows Subsystem for Android, Android Phones, Tablets, Android TVs, Fire TVs. (Remote Friendly)  
+# Netspeed Monitor
 
-**What does the app do?**  
-It adds an overlay that shows mobile data, Ethernet or WiFi network speed. The overlay shows the rate at which your data is being consumed. The indicator updates in real-time showing the current network speed at all times.  
+Netspeed is a cross-platform desktop application that shows the live upload speed, download speed and day's usage as an overlay.
 
+[Screenshot](/screenshot.jpg?raw=true)
 
-## PC version (Open Source):
-Source code is available here. Download available in releases.
+## Features
 
-## Android version:
-Available @ [Play Store](https://play.google.com/store/apps/details?id=visnkmr.apps.timenetspeed), [Amazon Appstore](https://www.amazon.com/Vishnu-N-K-Speed-Monitor/dp/B0786KC4C1/). Android version also has Useful Information Screen to monitor Free Memory, Uptime and Session Data Usage .  
-  
-**Customisation offered:**  
-✓ 12 hour/ 24 hour clock.  
-✓ Supports Android TVs with overscan enabled.  
-✓ Adjust Size of Time and speed meter.  
-  
-*Please Note:  
-Some Fire TV(s), Android device(s), TV(s) require additional [steps to enable overlay](https://visnkmr.github.io/overlay-permission-help) since they lack the settings option to be able to enable Overlay permission for any app, hence, Unless permission is allowed manually the overlays won't be displayed. Hence, shows you these details on opening the app.*  
+- Displays the current upload and download speed as an overlay
+- Shows the total data usage for the day, updates every minute
+- Supports Windows, Linux, and macOS
+- Lightweight and easy to use
+
+## Installation
+
+To install Netspeed on your system, follow these steps:
+
+- Download the latest release from the [releases page](/releases) for your platform.
+- Run the executable file downloaded as per your OS.
+- Optionally, you can create a shortcut or add the executable to your startup folder for convenience.
+
+## Usage
+
+To use Netspeed , simply run the executable file and you will see an overlay open in a window with a close and minimise option either side of upload speed, download speed, day's usage.
+
+## Documentation
+
+For more information about Netspeed, please visit the [wiki page](/wiki).
+
+## Contributing
+
+Netspeed is an open source project and welcomes contributions from anyone who wants to improve or extend it. Please read the [contributing guide](/CONTRIBUTING.md) for more details on how to get started.
+
+If you find a bug or have a feature request, please open an issue on [GitHub](/issues).
+
+If you have any questions or feedback, please contact the [author](https://github.com/visnkmr).
+
+## License
+
+Netspeed is licensed under the [MIT License](/LICENSE). This means you can use, copy, modify, and distribute it as long as you give credit to the original author and include the license notice.
