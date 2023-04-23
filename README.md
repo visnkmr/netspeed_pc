@@ -2,7 +2,7 @@
 
 Netspeed is a cross-platform desktop application that shows the live upload speed, download speed and day's usage as an overlay.
 
-[Screenshot](/screenshot.jpg?raw=true)
+![Screenshot](/screenshot.jpg?raw=true)
 
 ## Features
 
