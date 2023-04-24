@@ -1,12 +1,10 @@
 {
   "build": {
     "beforeDevCommand": {
-      "script": "npm run build:ts",
-      "wait": false
+      "script": ""
     },
     "beforeBuildCommand": {
-      "script": "npm run build:ts",
-      "wait": false
+      "script": "npm run build:ts"
     },
     "devPath": "../src",
     "distDir": "../src",
