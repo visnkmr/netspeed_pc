@@ -21,6 +21,7 @@
         "hide": false,
         "show": false
       },
+      
       "process": {
         "all": false,
         "exit": true,
@@ -37,6 +38,10 @@
         "setAlwaysOnTop": true,
         "startDragging": true
       }
+    },
+    "systemTray":{
+      "iconPath": "icons/icon.png",
+      "iconAsTemplate": true
     },
     "bundle": {
       "active": false,

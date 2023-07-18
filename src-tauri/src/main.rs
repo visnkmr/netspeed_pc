@@ -1,9 +1,10 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-use std::{thread, env, process};
+use std::{thread, env, process, time::SystemTime};
+use chrono::{DateTime, Utc, Local};
 // use ns_sse::*;
-use tauri::{Manager, AppHandle, Window, Size, LogicalSize};
+use tauri::{Manager, AppHandle, Window, Size, LogicalSize, CustomMenuItem, Submenu, GlobalWindowEvent, WindowEvent, Menu, SystemTray, SystemTrayMenu};
 
 // // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 // #[tauri::command]
@@ -15,9 +16,10 @@ use tauri::{Manager, AppHandle, Window, Size, LogicalSize};
 //     format!("start")
 // }
 #[tauri::command]
-fn exit(app: AppHandle) {
+fn exit(app: Window) {
     println!("exit callled");
-  app.exit(0);
+    app.hide();
+  // app.get_window();
 }
 #[tauri::command]
 fn mini(app: AppHandle) ->Result<(),()>{
@@ -83,7 +85,168 @@ let mut iname=String::new();
   thread::spawn(move ||{
     ns_sse::startserving(iname);
   });
-    tauri::Builder::default()
+  let reload = CustomMenuItem::new("reload", "Reload".to_string());
+  let hide_size = CustomMenuItem::new("nosize", "Hide size".to_string());
+  let toggle_search = CustomMenuItem::new("tsearch", "Toggle search".to_string());
+  let hide_child_count = CustomMenuItem::new("folcount", "Hide child count".to_string());
+  // let back = CustomMenuItem::new("back-button", "Back".to_string());
+  // let forward = CustomMenuItem::new("forward-button", "Forward".to_string());
+  let recent = CustomMenuItem::new("recent", "Recent".to_string());
+  
+  let menu = Menu::new()
+  .add_submenu(Submenu::new("File", Menu::new()
+      // .add_item(open_terminal)
+      .add_item(hide_size)
+      .add_item(reload)
+      .add_item(toggle_search)
+      .add_item(hide_child_count)
+      
+  ))
+  
+  .add_submenu(Submenu::new("Window", Menu::new()
+  .add_item(CustomMenuItem::new("close", "Close"))
+ 
+      
+  ))
+
+  .add_item(CustomMenuItem::new("Learn More", "Learn More"))
+  .add_item(CustomMenuItem::new("quit", "Quit"))
+   
+    // .add_item(back)
+    // .add_item(forward)
+    .add_item(recent)
+    ;
+    let app=tauri::Builder::default()
+    .setup(|app| {
+      
+      // let main_window=app.get_window("main").unwrap();
+      // main_window
+      // .on_menu_event(|event| {
+      //   match event.menu_item_id() {
+      //     "reload" => {
+      //       std::process::exit(0);
+      //     }
+      //     "close" => {
+      //       // main_window.close();
+      //       // event.window().close().unwrap();
+      //     }
+      //     "otb"=>{
+      //       // otb(event.window().label(),g);
+  
+      //     }
+      //     "Learn More" => {
+      //         let url = "https://github.com/visnkmr/iomer";
+      //         // shell::open(&event.shell_scope(), url.to_string(), None).unwrap();
+      //       }
+      //     _ => {}
+      //   }
+      // });
+      // println!("{:?}",app);
+      
+      // let handle = app.handle();
+    // std::thread::spawn(move || {
+    //   let window = tauri::WindowBuilder::new(
+    //     &handle,
+    //     "label",
+    //     tauri::WindowUrl::App("index.html".into())
+    //   ).build().unwrap();
+    // });
+    // let window = tauri::WindowBuilder::new(app, "label", tauri::WindowUrl::App("index.html".into()))
+    // .build()
+    // .unwrap();
+    let app_handle = app.handle();
+    let tray_id = "my-tray";
+    SystemTray::new()
+      .with_id(tray_id)
+      .with_menu(
+        SystemTrayMenu::new()
+          .add_item(CustomMenuItem::new("quit", "Quit"))
+          .add_item(CustomMenuItem::new("open", "Open"))
+      )
+      .on_event({
+        
+        move |event| {
+        match event{
+            tauri::SystemTrayEvent::MenuItemClick { tray_id, id,.. } => {
+              
+              if(id=="quit"){
+                
+
+                std::process::exit(0);
+              }
+              else{
+                // println!("{:?}",gk);
+                let absolute_date=getuniquewindowlabel();
+                // app.get_window("main").unwrap().show();
+                opennewwindow(&app_handle,"uio",&absolute_date);
+
+                
+                // tauri::Builder::new()
+                // // .manage(gk)
+                // .invoke_handler(
+                //   tauri::generate_handler![
+                //     list_files,
+                //     ]
+                //   )
+                // .run(tauri::generate_context!())
+                // .expect("error while running tauri application");
+              }
+
+            },
+            _ =>{
+              //on right click on tray icon on windows this is triggered.
+            },
+        }
+        // let tray_handle = app_handle.tray_handle_by_id(tray_id).unwrap();
+        
+      }
+    })
+      .build(app)?;
+    
+      // get an instance of AppHandle
+      // let app_handle = app.handle().get_window("main").unwrap();
+      // let g=app.state::<FileSizeFinder>();
+    //   // spawn a thread to list the files in the current directory on startup
+    // //   std::thread::spawn(move || {
+    // //     list_files(".".to_string(), app_handle.get_window("main").unwrap());
+    // //   });
+    //   // set the window flags to remove WS_MAXIMIZEBOX
+    //   app_handle.set_window_flags(|flags| flags & !WS_MAXIMIZEBOX)?;
+    
+      Ok(())
+    })
+    .menu(menu)
+    .on_menu_event(|event| {
+      match event.menu_item_id() {
+        "quit" => {
+          std::process::exit(0);
+        }
+        "close" => {
+          event.window().close().unwrap();
+        }
+        "reload"=>{
+          event.window().emit("reloadlist","reload").unwrap();
+          // otb(event.window().label(),g);
+        }
+        "nosize"=>{
+          event.window().emit("reloadlist","nosize").unwrap();
+          // otb(event.window().label(),g);
+        }
+        "folcount"=>{
+          event.window().emit("reloadlist","folcount").unwrap();
+        }
+        "recent"=>{
+          event.window().emit("reloadlist","recent").unwrap();
+        }
+        "tsearch"=>{
+          event.window().emit("reloadlist","tsearch").unwrap();
+        }
+        _ => {}
+      }
+    })
+    .on_window_event(on_window_event)
+
+  
         .invoke_handler(tauri::generate_handler!
             [
             // greet,
@@ -99,6 +262,21 @@ let mut iname=String::new();
 
       
 }
+fn on_window_event(event: GlobalWindowEvent) {
+  if let WindowEvent::CloseRequested {
+      #[cfg(not(target_os = "linux"))]
+      api,
+      ..
+  } = event.event()
+  {
+
+      // #[cfg(target_os = "macos")]
+      // {
+      //     app.hide().unwrap();
+      //     api.prevent_close();
+      // }
+  }
+}
 
 // #[tauri::command]
 // fn button1_clicked() {
@@ -109,3 +287,29 @@ let mut iname=String::new();
 // fn button2_clicked() {
 //   eprintln!("Button 2 clicked!");
 // }
+
+pub async fn opennewwindow(app_handle:&AppHandle,title:&str,label:&str)->Window{
+
+  // let INIT_SCRIPT= [r#"
+  //             console.log("poiu");
+  //              let kpg="#,pathtt,r#"
+  //                 "#].concat();
+                tauri::WindowBuilder::new(
+                  app_handle,
+                  label,
+                  tauri::WindowUrl::App("index.html".into())
+                )
+                
+                // .initialization_script(&INIT_SCRIPT)
+                .title(title).build().unwrap()
+}
+
+#[tauri::command]
+fn getuniquewindowlabel()->String{
+  let now = SystemTime::now();
+
+                let now_date = DateTime::<Utc>::from(now).with_timezone(&Local);
+                let absolute_date = now_date.format("%d%m%H%M%S").to_string();
+                // println!("{absolute_date}");
+                absolute_date
+}
