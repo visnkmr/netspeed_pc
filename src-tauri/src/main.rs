@@ -185,11 +185,7 @@ let mut iname=String::new();
     
       Ok(())
     })
-    .on_menu_event(|event| {
-      match event.menu_item_id() {
-        _ => {}
-      }
-    })
+   
     .on_window_event(on_window_event)
 
   
