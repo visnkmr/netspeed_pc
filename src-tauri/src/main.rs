@@ -85,37 +85,7 @@ let mut iname=String::new();
   thread::spawn(move ||{
     ns_sse::startserving(iname);
   });
-  let reload = CustomMenuItem::new("reload", "Reload".to_string());
-  let hide_size = CustomMenuItem::new("nosize", "Hide size".to_string());
-  let toggle_search = CustomMenuItem::new("tsearch", "Toggle search".to_string());
-  let hide_child_count = CustomMenuItem::new("folcount", "Hide child count".to_string());
-  // let back = CustomMenuItem::new("back-button", "Back".to_string());
-  // let forward = CustomMenuItem::new("forward-button", "Forward".to_string());
-  let recent = CustomMenuItem::new("recent", "Recent".to_string());
   
-  let menu = Menu::new()
-  .add_submenu(Submenu::new("File", Menu::new()
-      // .add_item(open_terminal)
-      .add_item(hide_size)
-      .add_item(reload)
-      .add_item(toggle_search)
-      .add_item(hide_child_count)
-      
-  ))
-  
-  .add_submenu(Submenu::new("Window", Menu::new()
-  .add_item(CustomMenuItem::new("close", "Close"))
- 
-      
-  ))
-
-  .add_item(CustomMenuItem::new("Learn More", "Learn More"))
-  .add_item(CustomMenuItem::new("quit", "Quit"))
-   
-    // .add_item(back)
-    // .add_item(forward)
-    .add_item(recent)
-    ;
     let app=tauri::Builder::default()
     .setup(|app| {
       
@@ -178,7 +148,7 @@ let mut iname=String::new();
                 // println!("{:?}",gk);
                 let absolute_date=getuniquewindowlabel();
                 // app.get_window("main").unwrap().show();
-                opennewwindow(&app_handle,"uio",&absolute_date);
+                showwindow(&app_handle).unwrap();
 
                 
                 // tauri::Builder::new()
@@ -215,32 +185,8 @@ let mut iname=String::new();
     
       Ok(())
     })
-    .menu(menu)
     .on_menu_event(|event| {
       match event.menu_item_id() {
-        "quit" => {
-          std::process::exit(0);
-        }
-        "close" => {
-          event.window().close().unwrap();
-        }
-        "reload"=>{
-          event.window().emit("reloadlist","reload").unwrap();
-          // otb(event.window().label(),g);
-        }
-        "nosize"=>{
-          event.window().emit("reloadlist","nosize").unwrap();
-          // otb(event.window().label(),g);
-        }
-        "folcount"=>{
-          event.window().emit("reloadlist","folcount").unwrap();
-        }
-        "recent"=>{
-          event.window().emit("reloadlist","recent").unwrap();
-        }
-        "tsearch"=>{
-          event.window().emit("reloadlist","tsearch").unwrap();
-        }
         _ => {}
       }
     })
@@ -288,20 +234,20 @@ fn on_window_event(event: GlobalWindowEvent) {
 //   eprintln!("Button 2 clicked!");
 // }
 
-pub async fn opennewwindow(app_handle:&AppHandle,title:&str,label:&str)->Window{
-
+pub fn showwindow(app_handle:&AppHandle)->Result<(), tauri::Error>{
+  app_handle.get_window("main").unwrap().show()
   // let INIT_SCRIPT= [r#"
   //             console.log("poiu");
   //              let kpg="#,pathtt,r#"
   //                 "#].concat();
-                tauri::WindowBuilder::new(
-                  app_handle,
-                  label,
-                  tauri::WindowUrl::App("index.html".into())
-                )
+                // tauri::WindowBuilder::new(
+                //   app_handle,
+                //   label,
+                //   tauri::WindowUrl::App("index.html".into())
+                // )
                 
-                // .initialization_script(&INIT_SCRIPT)
-                .title(title).build().unwrap()
+                // // .initialization_script(&INIT_SCRIPT)
+                // .title(title).build().unwrap()
 }
 
 #[tauri::command]
