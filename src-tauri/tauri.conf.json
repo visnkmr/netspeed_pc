@@ -11,7 +11,7 @@
     "withGlobalTauri": true
   },
   "package": {
-    "productName": "Netspeed",
+    "productName": "netspeed",
     "version": "0.1.0"
   },
   "tauri": {
