@@ -23,10 +23,6 @@ To install Netspeed on your system, follow these steps:
 
 To use Netspeed , simply run the executable file and you will see an overlay open in a window with a close and minimise option either side of upload speed, download speed, day's usage.
 
-## Documentation
-
-For more information about Netspeed, please visit the [wiki page](/wiki).
-
 ## Contributing
 
 Netspeed is an open source project and welcomes contributions from anyone who wants to improve or extend it. Please read the [contributing guide](/CONTRIBUTING.md) for more details on how to get started.
