@@ -1,4 +1,7 @@
 {
+  "name": "netspeed",
+  "version": "2",
+  "private": true,
   "devDependencies": {
     "typescript": "^5.0.4"
   },
