@@ -4,7 +4,7 @@
 use std::{thread, env, process, time::SystemTime};
 use chrono::{DateTime, Utc, Local};
 // use ns_sse::*;
-use tauri::{Manager, AppHandle, Window, Size, LogicalSize, CustomMenuItem, Submenu, GlobalWindowEvent, WindowEvent, Menu, SystemTray, SystemTrayMenu};
+use tauri::{Manager, AppHandle, Window, Size, LogicalSize, CustomMenuItem, Submenu, GlobalWindowEvent, WindowEvent, Menu};
 
 // // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 // #[tauri::command]
@@ -18,7 +18,7 @@ use tauri::{Manager, AppHandle, Window, Size, LogicalSize, CustomMenuItem, Subme
 #[tauri::command]
 fn exit(app: Window) {
     println!("exit callled");
-    app.hide();
+    app.close();
   // app.get_window();
 }
 #[tauri::command]
@@ -124,54 +124,54 @@ let mut iname=String::new();
     // let window = tauri::WindowBuilder::new(app, "label", tauri::WindowUrl::App("index.html".into()))
     // .build()
     // .unwrap();
-    let app_handle = app.handle();
-    let tray_id = "my-tray";
-    SystemTray::new()
-      .with_id(tray_id)
-      .with_menu(
-        SystemTrayMenu::new()
-          .add_item(CustomMenuItem::new("quit", "Quit"))
-          .add_item(CustomMenuItem::new("open", "Open"))
-      )
-      .on_event({
+    // let app_handle = app.handle();
+    // let tray_id = "my-tray";
+    // SystemTray::new()
+    //   .with_id(tray_id)
+    //   .with_menu(
+    //     SystemTrayMenu::new()
+    //       .add_item(CustomMenuItem::new("quit", "Quit"))
+    //       .add_item(CustomMenuItem::new("open", "Open"))
+    //   )
+    //   .on_event({
         
-        move |event| {
-        match event{
-            tauri::SystemTrayEvent::MenuItemClick { tray_id, id,.. } => {
+    //     move |event| {
+    //     match event{
+    //         tauri::SystemTrayEvent::MenuItemClick { tray_id, id,.. } => {
               
-              if(id=="quit"){
+    //           if(id=="quit"){
                 
 
-                std::process::exit(0);
-              }
-              else{
-                // println!("{:?}",gk);
-                let absolute_date=getuniquewindowlabel();
-                // app.get_window("main").unwrap().show();
-                showwindow(&app_handle).unwrap();
+    //             std::process::exit(0);
+    //           }
+    //           else{
+    //             // println!("{:?}",gk);
+    //             let absolute_date=getuniquewindowlabel();
+    //             // app.get_window("main").unwrap().show();
+    //             showwindow(&app_handle).unwrap();
 
                 
-                // tauri::Builder::new()
-                // // .manage(gk)
-                // .invoke_handler(
-                //   tauri::generate_handler![
-                //     list_files,
-                //     ]
-                //   )
-                // .run(tauri::generate_context!())
-                // .expect("error while running tauri application");
-              }
+    //             // tauri::Builder::new()
+    //             // // .manage(gk)
+    //             // .invoke_handler(
+    //             //   tauri::generate_handler![
+    //             //     list_files,
+    //             //     ]
+    //             //   )
+    //             // .run(tauri::generate_context!())
+    //             // .expect("error while running tauri application");
+    //           }
 
-            },
-            _ =>{
-              //on right click on tray icon on windows this is triggered.
-            },
-        }
-        // let tray_handle = app_handle.tray_handle_by_id(tray_id).unwrap();
+    //         },
+    //         _ =>{
+    //           //on right click on tray icon on windows this is triggered.
+    //         },
+    //     }
+    //     // let tray_handle = app_handle.tray_handle_by_id(tray_id).unwrap();
         
-      }
-    })
-      .build(app)?;
+    //   }
+    // })
+    //   .build(app)?;
     
       // get an instance of AppHandle
       // let app_handle = app.handle().get_window("main").unwrap();
