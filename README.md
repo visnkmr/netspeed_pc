@@ -1,3 +1,4 @@
+[![Github All Releases](https://img.shields.io/github/downloads/visnkmr/netspeed_pc/total.svg)]()
 # Netspeed Monitor
 
 Netspeed is a cross-platform desktop application that shows the live upload speed, download speed and day's usage as an overlay.
